@@ -1,0 +1,16 @@
+# PostgreSQL. Versions 9.3 and up are supported.
+# For details on connection pooling, see Rails configuration guide
+# https://guides.rubyonrails.org/configuring.html#database-pooling
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= Rails.configuration.setting[:database][:max_threads] %>
+  timeout: 5000
+  port: 5432
+  host: localhost
+  username: username
+  password: password
+
+development:
+  <<: *default
+  database: sweeper_development
