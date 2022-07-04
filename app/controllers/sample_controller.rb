@@ -9,7 +9,7 @@ class SampleController < ApplicationController
     #Do Something
   end
 
-  def edit
+    def edit
     #Do Something
   end
 
