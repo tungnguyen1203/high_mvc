@@ -3,6 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.2'
 
+gem 'simple_form'
 gem 'pry'
 gem 'kaminari' 
 gem 'faker', '~> 2.21'

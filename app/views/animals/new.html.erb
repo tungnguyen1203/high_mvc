@@ -1,7 +1,8 @@
 <div class="container">
   <h1>New Animal</h1>
+  <p id="notice"><%= notice %></p>
 
-<%= render 'form', animal: @animal %>
+  <%= render 'form', animal: @animal %>
 
-<%= link_to 'Back', animals_path %>
+  <%= link_to 'Back', animals_path %>
 </div>

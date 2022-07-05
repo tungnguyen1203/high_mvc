@@ -1,7 +1,5 @@
 class AnimalsController < ApplicationController
-  before_action :set_animal, only: %i[ show edit update destroy ]
   
-  # GET /animals or /animals.json
   def index
     operator = Animals::IndexOperation.new(params)
     operator.call
@@ -16,65 +14,56 @@ class AnimalsController < ApplicationController
     end
   end
 
-  # GET /animals/1 or /animals/1.json
   def show
+    operator = Animals::ShowOperation.new(params)
+    operator.call
+    @animal = operator.animal
   end
 
-  # GET /animals/new
   def new
-    @animal = Animal.new
+    operator = Animals::NewOperation.new(params)
+    operator.call
+    @animal = operator.animal
   end
 
-  # GET /animals/1/edit
   def edit
+    operator = Animals::EditOperation.new(params)
+    operator.call
+    @animal = operator.animal
   end
 
-  # POST /animals or /animals.json
   def create
     operator = Animals::CreateOperation.new(params)
-    operator.call
-    operator.form
-    @animal = operator.animal
+    if operator.call.nil?
+      # flash[:notice] = operator.form.errors.full_messages.join(', ')
+      redirect_to new_animal_path
+    else 
+      flash[:notice] = "Object successfully created"
+      @animal = operator.animal 
+      redirect_to root_path
+    end
     
-    binding.pry
-    if operator.form.errors
-      render 'new'
-    else
-       redirect_to 'new'
-    end
   end
 
-  # PATCH/PUT /animals/1 or /animals/1.json
   def update
-    respond_to do |format|
-      if @animal.update(animal_params)
-        format.html { redirect_to animal_url(@animal), notice: "Animal was successfully updated." }
-        format.json { render :show, status: :ok, location: @animal }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @animal.errors, status: :unprocessable_entity }
-      end
+    operator = Animals::UpdateOperation.new(params)
+
+    if operator.call.nil?
+      flash[:notice] = "Object failed update"
+      redirect_to animal_path
+    else 
+      flash[:notice] = "Object successfully created"
+      @animal = operator.animal 
+      redirect_to root_path
     end
+
   end
 
-  # DELETE /animals/1 or /animals/1.json
   def destroy
-    @animal.destroy
-
-    respond_to do |format|
-      format.html { redirect_to animals_url, notice: "Animal was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    operator = Animals::DestroyOperation.new(params)
+    operator.call
+    flash[:notice] = "Object was successfully updated"
+    redirect_to root_path
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_animal
-      @animal = Animal.find(params[:id])
-    end
-
-    # Only allow a list of trusted parameters through.
-    # def animal_params
-    #   params.require(:animal).permit(:name, :age)
-    # end
 end
