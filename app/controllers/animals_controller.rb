@@ -17,29 +17,30 @@ class AnimalsController < ApplicationController
   def show
     operator = Animals::ShowOperation.new(params)
     operator.call
-    @animal = operator.animal
+    @form = operator.form
   end
 
   def new
     operator = Animals::NewOperation.new(params)
     operator.call
-    @animal = operator.animal
+    @form = operator.form
   end
 
   def edit
     operator = Animals::EditOperation.new(params)
     operator.call
-    @animal = operator.animal
+    @form = operator.form
   end
 
   def create
     operator = Animals::CreateOperation.new(params)
-    if operator.call.nil?
-      # flash[:notice] = operator.form.errors.full_messages.join(', ')
-      redirect_to new_animal_path
+    operator.call
+    @form = operator.form
+
+    if operator.form.errors.present?
+      render "new"
     else 
       flash[:notice] = "Object successfully created"
-      @animal = operator.animal 
       redirect_to root_path
     end
     
@@ -47,13 +48,14 @@ class AnimalsController < ApplicationController
 
   def update
     operator = Animals::UpdateOperation.new(params)
+    operator.call
 
-    if operator.call.nil?
+    if operator.form.errors.present?
       flash[:notice] = "Object failed update"
-      redirect_to animal_path
+      render "edit"
     else 
       flash[:notice] = "Object successfully created"
-      @animal = operator.animal 
+      @form = operator.form 
       redirect_to root_path
     end
 
@@ -62,7 +64,7 @@ class AnimalsController < ApplicationController
   def destroy
     operator = Animals::DestroyOperation.new(params)
     operator.call
-    flash[:notice] = "Object was successfully updated"
+    flash[:notice] = "Object was successfully deleted"
     redirect_to root_path
   end
 

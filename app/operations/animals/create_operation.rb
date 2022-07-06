@@ -1,11 +1,9 @@
 module Animals
   class CreateOperation < ApplicationOperation
-    attr_reader :animal
-
+    
     def call
       step_validation{ return }
       step_create_animal
-      step_save
     end
     
   private
@@ -17,13 +15,9 @@ module Animals
     end
     
     def step_create_animal
-      @animal = Animal.new(params_permit)
+      Animal.create(form.attributes)
     end
 
-    def step_save
-      @animal.save
-    end
-    
     def params_permit
       params.require(:animal).permit(:name, :age)
     end

@@ -9,7 +9,7 @@ module Animals
   private
     
     def step_find_id
-      @animal = Animal.find(params[:id])
+      @form = Animal.find(params[:id])
     end
     
   end

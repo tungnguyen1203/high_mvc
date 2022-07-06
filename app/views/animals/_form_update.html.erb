@@ -1,4 +1,4 @@
-<%= form_with model: @form, url: animals_path, scope: 'animal' do |f| %>
+<%= form_with model: @form, scope: 'animal' do |f| %>
   <div class="field">
     <%= f.label :name %>
     <%= f.text_field :name, class:"form-control" %>

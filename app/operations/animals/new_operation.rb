@@ -1,6 +1,5 @@
 module Animals
   class NewOperation < ApplicationOperation
-    attr_reader :animal
 
     def call
       step_new_animal
@@ -9,8 +8,8 @@ module Animals
   private
 
     def step_new_animal
-      @animal = Animal.new
+      @form = NewForm.new()
     end
-
+    
   end
 end
