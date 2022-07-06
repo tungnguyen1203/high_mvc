@@ -75,5 +75,5 @@ Things you may want to cover:
 		○ Dùng để xử lí logic cho view
 
 	7. Application Helper
-  
+
 		○ Dùng để viết các method dùng lại nhiều lần. Phạm vi sử dụng toàn project
