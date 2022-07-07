@@ -1,3 +1,1 @@
-class Animal < ApplicationRecord
-  
-end
+class Animal < ApplicationRecord;end

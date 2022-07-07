@@ -10,6 +10,5 @@ module Animals
     def step_new_animal
       @form = NewForm.new()
     end
-    
   end
 end

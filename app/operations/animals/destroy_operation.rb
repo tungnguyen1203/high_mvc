@@ -16,6 +16,5 @@ module  Animals
     def step_destroy_animal
       @animal.destroy
     end
-
   end
 end
