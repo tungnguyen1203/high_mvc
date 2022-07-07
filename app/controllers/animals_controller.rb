@@ -8,8 +8,8 @@ class AnimalsController < ApplicationController
     respond_to do |format|
       format.html
       format.json { 
-        render json: {entries: render_to_string(partial: "list_animal", formats: [:html]),
-        pagination: view_context.paginate(@animals)}
+        render json: { entries: render_to_string(partial: "list_animal", formats: [:html]),
+                       pagination: view_context.paginate(@animals) }
       }
     end
   end
@@ -43,7 +43,6 @@ class AnimalsController < ApplicationController
       flash[:notice] = "Object successfully created"
       redirect_to root_path
     end
-    
   end
 
   def update
@@ -58,7 +57,6 @@ class AnimalsController < ApplicationController
       @form = operator.form 
       redirect_to root_path
     end
-
   end
 
   def destroy
@@ -67,5 +65,4 @@ class AnimalsController < ApplicationController
     flash[:notice] = "Object was successfully deleted"
     redirect_to root_path
   end
-
 end

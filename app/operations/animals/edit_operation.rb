@@ -11,6 +11,5 @@ module Animals
     def step_find_id
       @form = Animal.find(params[:id])
     end
-    
   end
 end

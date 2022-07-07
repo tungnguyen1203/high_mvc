@@ -20,6 +20,5 @@ module Animals
     def params_permit
       params.require(:animal).permit(:name, :age)
     end
-      
   end
 end

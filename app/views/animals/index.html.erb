@@ -4,6 +4,15 @@
 <%= link_to 'New Animal', new_animal_path %>
 <div data-controller='animal' data-action='scroll@window->animal#scroll'>
   <div data-animal-target="entries">
+    <table  class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Age</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+    </table>
     <%= render "list_animal"%>
     <br>
   </div>
